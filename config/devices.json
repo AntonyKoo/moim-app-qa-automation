@@ -1,20 +1,20 @@
 {
     "android": {
-      "platformName": "Android",
-      "automationName": "UiAutomator2",
-      "deviceName": "Android Device",
-      "udid": "",
-      "appPackage": "com.yourcompany.appname",
-      "appActivity": "com.yourcompany.appname.MainActivity",
-      "noReset": false
+      "platformName": "${APPIUM_PLATFORM_NAME}",
+      "automationName": "${APPIUM_AUTOMATION_NAME}",
+      "deviceName": "${APPIUM_DEVICE_NAME}",
+      "udid": "${APPIUM_UDID}", 
+      "appPackage": "${APPIUM_APP_PACKAGE}",
+      "appActivity": "${APPIUM_APP_ACTIVITY}",
+      "noReset": "${APPIUM_NO_RESET}"
     },
-    
+
     "ios": {
-      "platformName": "iOS",
-      "automationName": "XCUITest",
-      "deviceName": "iPhone",
-      "udid": "",
-      "bundleId": "com.yourcompany.appname",
-      "noReset": false
+      "platformName": "${APPIUM_PLATFORM_NAME}",
+      "automationName": "${APPIUM_AUTOMATION_NAME}",
+      "deviceName": "${APPIUM_DEVICE_NAME}",
+      "udid": "${APPIUM_UDID}",
+      "bundleId": "${APPIUM_APP_PACKAGE}",
+      "noReset": "${APPIUM_NO_RESET}"
     }
   }
