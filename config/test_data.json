@@ -1,0 +1,11 @@
+{
+    "login": {
+      "valid_user": {
+        "username": "test_user",
+        "password": "test_password"
+      }
+    },
+    "app": {
+      "download_url": "https://your-internal-ci.com/latest.apk"
+    }
+  }

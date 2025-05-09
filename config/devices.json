@@ -1,0 +1,20 @@
+{
+    "android": {
+      "platformName": "Android",
+      "automationName": "UiAutomator2",
+      "deviceName": "Android Device",
+      "udid": "",
+      "appPackage": "com.yourcompany.appname",
+      "appActivity": "com.yourcompany.appname.MainActivity",
+      "noReset": false
+    },
+    
+    "ios": {
+      "platformName": "iOS",
+      "automationName": "XCUITest",
+      "deviceName": "iPhone",
+      "udid": "",
+      "bundleId": "com.yourcompany.appname",
+      "noReset": false
+    }
+  }
