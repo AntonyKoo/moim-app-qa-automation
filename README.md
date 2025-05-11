@@ -2,6 +2,13 @@
 
 MOIM 앱의 자동화 테스트 프로젝트입니다.
 
+## 프로젝트 목적
+
+- MOIM 앱의 주요 기능에 대한 자동화 테스트 수행
+- 테스트 결과의 자동화된 보고서 생성
+- 테스트 실행 시간 단축 및 효율성 향상
+- 테스트 결과의 일관성 유지
+
 ## 프로젝트 구조
 
 ```
@@ -73,7 +80,27 @@ pytest tests/
 
 # 특정 테스트 파일 실행
 pytest tests/android/tc1_launch_and_login.py
+
+# HTML 리포트 생성
+pytest --html=reports/report.html tests/
 ```
+
+## 테스트 시나리오
+
+### 1. 기본 연결 테스트 (connection_test.py)
+- Appium 서버 연결 확인
+- 디바이스 연결 상태 확인
+- 앱 설치 상태 확인
+
+### 2. 앱 실행 및 로그인 테스트 (tc1_launch_and_login.py)
+- 앱 실행 확인
+- 알림 권한 팝업 처리
+- 로그인 버튼 동작 확인
+
+### 3. 권한 및 게스트 모드 테스트 (tc2_permission_guest.py)
+- 권한 요청 팝업 처리
+- 게스트 모드 진입 확인
+- 기본 권한 설정 확인
 
 ## 주요 의존성 패키지
 
@@ -90,8 +117,44 @@ pytest tests/android/tc1_launch_and_login.py
 - `venv` 디렉토리도 Git에 포함되지 않습니다
 - 테스트 실행 전 Appium 서버가 실행 중이어야 합니다
 
+## 문제 해결 가이드
+
+### 1. ModuleNotFoundError: No module named 'utils'
+- 프로젝트 루트 디렉토리에서 테스트를 실행해야 합니다
+- PYTHONPATH에 프로젝트 루트 디렉토리를 추가:
+```bash
+export PYTHONPATH=$PYTHONPATH:/path/to/moim-app-qa-automation
+```
+
+### 2. Appium 서버 연결 실패
+- Appium 서버가 실행 중인지 확인
+- 포트 충돌 확인 (기본 포트: 4723)
+- 환경 변수 APPIUM_SERVER_URL 확인
+
+### 3. 디바이스 연결 실패
+- 디바이스가 연결되어 있는지 확인
+- USB 디버깅이 활성화되어 있는지 확인
+- adb devices 명령어로 디바이스 인식 확인
+
 ## 테스트 구조
 
 - `tests/android/`: Android 플랫폼 테스트
   - `connection_test.py`: 기본 연결 테스트
-  - `tc1_launch_and_login.py`: 앱 실행 및 로그인 테스트 
+  - `tc1_launch_and_login.py`: 앱 실행 및 로그인 테스트
+  - `tc2_permission_guest.py`: 권한 및 게스트 모드 테스트
+
+## 기여 방법
+
+1. 이슈 생성
+   - 버그 리포트
+   - 기능 요청
+   - 문서 개선 제안
+
+2. Pull Request
+   - 코드 스타일 가이드 준수
+   - 테스트 코드 작성
+   - 문서 업데이트
+
+## 라이선스
+
+이 프로젝트는 MIT 라이선스 하에 배포됩니다. 
