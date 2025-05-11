@@ -35,6 +35,13 @@ env/
 *.swp
 *.swo
 
+# Test reports and screenshots
+reports/
+reports/screenshots/
+
+# Logs
+*.log
+
 # OS
 .DS_Store
 .DS_Store?
