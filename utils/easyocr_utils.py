@@ -68,20 +68,42 @@ def ocr_contains_keyword(driver, keyword, shot_name="scroll_step"):
 from selenium.webdriver.common.actions.action_builder import ActionBuilder
 from selenium.webdriver.common.actions.pointer_input import PointerInput
 
+# def scroll_down_w3c(driver, scroll_count=5):
+#     print(f"📥 W3C 방식 스크롤 {scroll_count}회 수행 후 OCR로 블록채널 탐색 시작")
+#     finger = PointerInput("touch", "finger")
+
+#     for i in range(scroll_count):
+#         print(f"↕️ W3C 스크롤 {i+1}/{scroll_count}")
+#         actions = ActionBuilder(driver, mouse=finger)
+#         actions.pointer_action.move_to_location(500, 1800)  # 안전한 아래 위치
+#         actions.pointer_action.pointer_down()
+#         actions.pointer_action.pause(0.3)
+#         actions.pointer_action.move_to_location(500, 630)   # 중간까지 스와이프
+#         actions.pointer_action.pointer_up()
+#         actions.perform()
+#         time.sleep(1.5)
+
 def scroll_down_w3c(driver, scroll_count=5):
-    print(f"📥 W3C 방식 스크롤 {scroll_count}회 수행 후 OCR로 블록채널 탐색 시작")
+    print(f"📥 사용자 지정 스크롤 좌표로 {scroll_count}회 스크롤 수행")
     finger = PointerInput("touch", "finger")
 
+    # 직접 지정한 안정 좌표
+    start_x, start_y = 403, 1953
+    end_x, end_y = 361, 412
+
     for i in range(scroll_count):
-        print(f"↕️ W3C 스크롤 {i+1}/{scroll_count}")
+        print(f"↕️ W3C 스크롤 {i+1}/{scroll_count}: ({start_x},{start_y}) → ({end_x},{end_y})")
+
         actions = ActionBuilder(driver, mouse=finger)
-        actions.pointer_action.move_to_location(500, 1800)  # 안전한 아래 위치
+        actions.pointer_action.move_to_location(start_x, start_y)
         actions.pointer_action.pointer_down()
-        actions.pointer_action.pause(0.3)
-        actions.pointer_action.move_to_location(500, 630)   # 중간까지 스와이프
-        actions.pointer_action.pointer_up()
+        actions.pointer_action.pause(0.4)  # 탭 오인 방지
+        actions.pointer_action.move_to_location(end_x, end_y)
+        actions.pointer_action.pause(0.4)  # 이동 후 안정성 확보
+        actions.pointer_action.release()
         actions.perform()
-        time.sleep(1.5)
+
+        time.sleep(2.0)  # 렌더링 여유
 
 
 def tap_text_by_ocr(driver, keywords, screenshot_name="ocr_target_search"):

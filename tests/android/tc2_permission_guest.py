@@ -82,11 +82,11 @@ try:
     # ✅ 사이드 네비게이션 열기
     print("📂 사이드 네비 열기 좌표 탭")
     time.sleep(4)
-    tap_coordinates(driver, 81, 2165)
+    tap_coordinates(driver, 77, 2164)
     time.sleep(3)
 
     # ✅ 일정 횟수 스크롤만 수행 (키워드 판단 안 함)
-    scroll_down_w3c(driver, scroll_count=5)
+    scroll_down_w3c(driver, scroll_count=9)
 
     block_keywords = ["BLOCK_1", "BLOCK1", "BLOCK_I","BLOCKI"]
 
@@ -108,6 +108,44 @@ try:
     else:
         print("❌ BLOCK_1 테스트 결과: '결제 정보' 미포함 (FAIL)")
         take_screenshot(driver, "block1_fail")
+
+    # ✅ 뒤로가기 버튼 클릭 (좌상단 좌표 탭)
+    tap_coordinates(driver, 55, 139)  # 실제 좌표는 앱 UI 기준으로 조정 필요
+    print("🔙 뒤로가기 버튼 클릭")
+    time.sleep(2)
+
+    # ✅ BLOCK_2 텍스트 위치 찾아 클릭
+    block2_keywords = ["BLOCK_2", "BLOCK2", "BLOCK_II", "BLOCKII"]
+    success, ocr_text = tap_text_by_ocr(driver, block2_keywords, screenshot_name="block1_ocr")
+    if not success:
+        raise Exception("❌ BLOCK_2 위치 탐색 실패")
+    time.sleep(3)
+
+    # ✅ BLOCK_2 진입 후 판단
+    block2_screen = take_screenshot(driver, "block2_check")
+    ocr_result = extract_text_easyocr(block2_screen)
+
+    print("📖 BLOCK_2 진입 화면 OCR 결과:")
+    print(ocr_result)
+
+    if "화면을" in ocr_result:
+        print("❌ BLOCK_2 테스트 결과: 블록 읽기 가능 (FAIL)")
+        take_screenshot(driver, "block2_fail")
+    else:
+        print("✅ BLOCK_2 테스트 결과: 채널 접근 가능, 블록 읽기 불가능 (PASS)")
+    
+    # ✅ 뒤로가기 버튼 클릭 (좌상단 좌표 탭)
+    tap_coordinates(driver, 55, 139)  # 실제 좌표는 앱 UI 기준으로 조정 필요
+    print("🔙 뒤로가기 버튼 클릭")
+    time.sleep(2)
+
+    # ✅ BLOCK_3 텍스트 위치 찾아 클릭 
+    block3_keywords = ["BLOCK_3", "BLOCK3", "BLOCK_III", "BLOCKIII"] 
+    success, ocr_text = tap_text_by_ocr(driver, block3_keywords, screenshot_name="block1_ocr")
+
+    if not success:
+        print("✅ BLOCK_3 테스트 결과: 채널 접근 불가능, 채널목록에서 보이지 않음(PASS)")
+    time.sleep(3)   
 
 except Exception as e:
     print(f"❌ 실행 중 오류 발생: {e}")
