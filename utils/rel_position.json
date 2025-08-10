@@ -1,0 +1,9 @@
+
+{
+    "_comment": "이 파일은 기준기기로부터 얻어낸 상대 좌표 모음입니다.",
+    "reference": { "width": 1080, "height": 2340 },
+    "explore_btn" : [0.52222, 0.87051],
+    "popup_banner_close_btn" : [0.345041, 0.651094],
+    "side_nav_open" : [0.077479, 0.909512],
+    "block_channel_back_btn" : [0.056818, 0.060606]
+}

@@ -65,9 +65,6 @@ def ocr_contains_keyword(driver, keyword, shot_name="scroll_step"):
     print(f"📖 OCR 텍스트 추출 결과: {text}")
     return keyword in text
 
-from selenium.webdriver.common.actions.action_builder import ActionBuilder
-from selenium.webdriver.common.actions.pointer_input import PointerInput
-
 # def scroll_down_w3c(driver, scroll_count=5):
 #     print(f"📥 W3C 방식 스크롤 {scroll_count}회 수행 후 OCR로 블록채널 탐색 시작")
 #     finger = PointerInput("touch", "finger")
@@ -140,6 +137,4 @@ def tap_text_by_ocr(driver, keywords, screenshot_name="ocr_target_search"):
     print("❌ 어떤 정답 키워드도 OCR에서 찾지 못함")
     print("📝 OCR 전체 추출 텍스트:\n" + full_text)
     return False, full_text
-
-
-
+    
