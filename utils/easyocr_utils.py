@@ -8,6 +8,7 @@ import os
 import time
 import cv2
 import numpy as np
+import re
 
 # EasyOCR Reader 초기화 (한국어 + 영어)
 reader = easyocr.Reader(['ko', 'en'], gpu=False)
@@ -79,6 +80,23 @@ def ocr_contains_keyword(driver, keyword, shot_name="scroll_step"):
 #         actions.pointer_action.pointer_up()
 #         actions.perform()
 #         time.sleep(1.5)
+
+def _norm_ocr(s: str) -> str:
+    # 공백/구두점 제거 + 정규화(필요 시 추가)
+    s = re.sub(r'[\s\u200b\u2060]+', '', s)            # 모든 공백/보이는-안보이는 스페이스 제거
+    s = re.sub(r'[^\w가-힣]', '', s)                   # 구두점 제거
+    # 흔오타 정규화: 켓 -> 겠 (원하면 더 추가)
+    s = s.replace("켓", "겠").replace("겟", "겠")
+    return s
+
+# "로그인이 필요합니다 ... 로그인하시겠습니까" 느슨 매칭
+LOGIN_HALF1_RE = re.compile(r"로그인이?필요합니다")  # '로그인이 필요합니다'에서 '이'와 공백 변형 허용
+LOGIN_HALF2_RE = re.compile(r"로그인하?시?겠?습?니까")  # 하/시/겠/습 사이 공백/누락 일부 허용
+
+def contains_login_dialog(text: str) -> bool:
+    t = _norm_ocr(text)
+    return bool(LOGIN_HALF1_RE.search(t)) and bool(LOGIN_HALF2_RE.search(t))
+
 
 def scroll_down_w3c(driver, scroll_count=5):
     print(f"📥 사용자 지정 스크롤 좌표로 {scroll_count}회 스크롤 수행")

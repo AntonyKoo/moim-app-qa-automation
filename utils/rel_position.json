@@ -5,5 +5,7 @@
     "explore_btn" : [0.52222, 0.87051],
     "popup_banner_close_btn" : [0.345041, 0.651094],
     "side_nav_open" : [0.077479, 0.909512],
-    "block_channel_back_btn" : [0.056818, 0.060606]
+    "block_channel_back_btn" : [0.056818, 0.060606],
+    "chat_input_box" : [0.456612, 0.842593],
+    "close_btn" : [0.583678, 0.529461]
 }
